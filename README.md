@@ -1,2 +1,2 @@
 # Trivial
-Proyecto de Ejemplo de juego de preguntasd y respuestas
+Proyecto de Ejemplo de juego de preguntas y respuestas
