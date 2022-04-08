@@ -5,6 +5,10 @@ class Partida():
         self.__col_preguntas = col_preg
         self.__marcador = 0
 
+    @property
+    def preguntas(self):
+        return self.__col_preguntas
+        
     def iniciar(self):
         print(self.__jugador)
         print(self.__modo)

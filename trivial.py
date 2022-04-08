@@ -22,3 +22,9 @@ mi_partida = Partida(j,m,col_preguntas)
 
 # Iniciar Partida
 mi_partida.iniciar()
+
+preguntas = mi_partida.preguntas
+for preg in preguntas:
+    print(preg.cuerpo)
+    for resp in preg.respuestas:
+        print(resp.cuerpo)
