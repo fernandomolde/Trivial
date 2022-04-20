@@ -17,7 +17,7 @@ class TestSqlite(unittest.TestCase):
     def test_borrado(self):
         mi_bd = Sql(BD)
         resultado = mi_bd.borrar('articulos','id')
-        self.assertIsNone(resultado)
+        self.assertEqual(resultado,1)
     
     def test_insercion_articulo(self):
         mi_bd = Sql(BD)
@@ -25,3 +25,11 @@ class TestSqlite(unittest.TestCase):
         valores = '"1234","Nada","123"'
         resultado = mi_bd.insertar('articulos',campos,valores)
         self.assertIsNotNone(resultado)
+    
+    def test_actualizacion(self):
+        mi_bd = Sql(BD)
+        campos = 'codigo, descripcion,precio'
+        valores = '"1234","Nada","123"'
+        mi_id = 28
+        resultado = mi_bd.actualizar('articulos',campos,valores,mi_id)
+        self.assertEqual(resultado,1)

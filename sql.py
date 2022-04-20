@@ -60,16 +60,18 @@ class Sql():
         consulta = f'delete from {tabla} where {campo_id} = {valor_id};'
         cnx = self.conectar()
         #TODO: Ejecutar de dentro de un try
-        cnx.execute(consulta)
+        salida = cnx.execute(consulta)
         cnx.commit()
         cnx.close()
         
+        return salida.rowcount 
+
     def insertar(self,tabla,lista_campo,lista_valor):
         """ 
         
         Añade un nuevo registro a la tabla pasada como paŕametro.
         La lista de campos debe tener el mismo número de elementos que la de valores.
-        La lista de canois es una cadena de campos separados por comas.
+        La lista de campos es una cadena de campos separados por comas.
 
         """
 
@@ -84,5 +86,29 @@ class Sql():
 
         return salida
 
-    def actualizar(self):
-        pass    
+    def actualizar(self,tabla,lista_campo,lista_valor,valor_id):
+        """
+
+        Actualiza un registro de la tabla pasada como parámetro
+        
+        """
+        
+        cnx = self.conectar()
+        consulta = f'update {tabla} set'
+        tmp = ''
+        campos = lista_campo.split(',')
+        valores = lista_valor.split(',')
+        for i in range(len(valores)):
+            tmp += f"{campos[i]}='{valores[i]}',"
+
+        consulta += tmp[:-1]
+        consulta += f' where id = {valor_id};'
+
+        cursor = cnx.cursor()
+        cnx.execute(consulta)
+        salida = cursor.rowcount
+        cnx.commit()
+        cnx.close()  
+        
+        return salida
+    
