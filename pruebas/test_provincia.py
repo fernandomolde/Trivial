@@ -7,4 +7,6 @@ class TestProvincia(unittest.TestCase):
         self.assertIsNotNone(p)
     
     def test_insert_provincias(self):
-        
+        p = Provincia(111,'primera')
+        resp = p.insertar()
+        self.assertIsNotNone(resp)
