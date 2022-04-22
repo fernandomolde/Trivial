@@ -77,7 +77,13 @@ class Sql():
 
         cnx = self.conectar()
         #TODO: Ejecutar de dentro de un try
-        consulta = f'insert into {tabla}({lista_campo}) values({lista_valor});'
+        lista_comillas = []
+        for val in lista_valor.split(','):
+            lista_comillas.append("'" + val + "'")
+        
+        tmp = ','.join(lista_comillas)
+        
+        consulta = f'insert into {tabla}({lista_campo}) values({tmp});'
         cursor = cnx.cursor()
         cnx.execute(consulta)
         salida = cursor.lastrowid
